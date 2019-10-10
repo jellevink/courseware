@@ -24,9 +24,14 @@ In the following picture we can see the responsibilities of the vendor and clien
  
 INSERT PICTURE HERE
  
+<!--TOC_START-->
+### Contents
+	- [Business scenarios](#business-scenarios)
+	- [Advantages](#advantages)
+
+<!--TOC_END-->
 ### Business scenarios
 
 
 
 ### Advantages
-
