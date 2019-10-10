@@ -1,5 +1,12 @@
 # Infrastructure As A Service (IaaS)
 
+<!--TOC_START-->
+### Contents
+	- [Description](#description)
+	- [Business scenarios](#business-scenarios)
+	- [Advantages](#advantages)
+
+<!--TOC_END-->
 ### Description
 
 IaaS is a computing infrastructure that can be provisioned and managed over the internet. 
@@ -26,12 +33,6 @@ In the following picture we can see the responsibilities of the vendor and clien
  
 INSERT PICTURE HERE
  
-<!--TOC_START-->
-### Contents
-	- [Business scenarios](#business-scenarios)
-	- [Advantages](#advantages)
-
-<!--TOC_END-->
 ### Business scenarios
 
 There are some typical business case scenarios where IaaS is applicable like:
@@ -52,4 +53,3 @@ Allows quick deployment with scalable structure based on demand, especially usef
   through IaaS. 
 
 ### Advantages
-
