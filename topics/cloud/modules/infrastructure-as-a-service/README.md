@@ -53,3 +53,23 @@ Allows quick deployment with scalable structure based on demand, especially usef
   through IaaS. 
 
 ### Advantages
+
+* **No capital expense and reduction in costs.**
+There is no upfront costs as you pay for what you use. 
+An attractive solution for start-ups.
+* **Business continuity and disaster recovery.** 
+Typically in order to achieve high availability, disaster recovery and business continuity requires a significant
+ investment in both technology and staff.
+ With the right Service Layer Agreement (SLA) on IaaS you could reduce the costs while achieving the previously
+  mentioned functionality. 
+* **Rapid innovation** the infrastructure is ready in minutes or hours for you to launch a product compared to days
+ or weeks when done internally.
+* **Rapid response** to demand with scaling up to accommodate those holiday spikes and scaling down once they're over
+ saves money. 
+* **More focus on business** time saved on not requiring to care for the IT infrastructure can be spent on other
+ business needs. 
+* **Stability, reliability and supportability** can be achieved with the right SLA with the provider. 
+Things like: software updates, hardware, troubleshooting or equipment problems could be taken care of by the provider
+ freeing up the time to focus on the business. 
+* **Security** through the service provider can be better in most cases than what you may be able to achieve in house
+, it will depend on the SLA you choose.
