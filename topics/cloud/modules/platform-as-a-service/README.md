@@ -22,4 +22,3 @@ What design patterns did you use? What best practices?
 What tools did you use and why?
 
 How did you review your own work?
-
