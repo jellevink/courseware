@@ -1,0 +1,3 @@
+# Inventory
+## Overview
+Ansible inventory.
