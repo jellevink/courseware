@@ -1,6 +1,12 @@
 ## Objective
 To have been able to setup Ansible yourself and hook 2 machines (Master and Node) together.  Also to start performing ad-hoc Ansible commands between them.
 
+<!--TOC_START-->
+## Contents
+- [Task](#task)
+	- [Install Ansible on a Linux VM](#install-ansible-on-a-linux-vm)
+
+<!--TOC_END-->
 ## Task
 
 ### Install Ansible on a Linux VM
