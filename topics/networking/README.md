@@ -12,6 +12,7 @@ These data links are established over cable media such as wires or optic cables,
 <!--MODULES_START-->
 ## Modules
 - [Frames](./modules/frames)
+- [IP address](./modules/ip-address)
 - [MAC Address](./modules/mac-address)
 - [Models](./modules/models)
 - [Standards and Organisations](./modules/standards-and-organisations)
