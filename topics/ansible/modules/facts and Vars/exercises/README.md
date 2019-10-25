@@ -1,6 +1,13 @@
 ## Objective
 To gain practical experience of working with Vars and Facts.
 
+<!--TOC_START-->
+## Contents
+- [Task](#task)
+	- [Working with Vars](#working-with-vars)
+	- [Working with Facts](#working-with-facts)
+
+<!--TOC_END-->
 ## Task
 ### Working with Vars
 - Create a playbook that will clone down a specific project from your GitHub Account.
