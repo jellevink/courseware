@@ -54,9 +54,9 @@ Essentially, if TCP is the postal service, IP is the postman. TCP makes sure tha
 The Internet Protocol requires five specific things in order to work:
 1. An **IP address**, assigned to whichever device is attempting to transfer information over the Internet
 2. **ARP**, a mechanism for mapping hardware-specific MAC addresses to networked IP addresses
-3. A clearly-defined local network (the `localhost`)
-4. A gateway from the local **internal** network to **external** networks
-5. A **routing** mechanism for moving data around both local and external networks
+3. A clearly-defined local network (the **`localhost`**)
+4. A **routing** mechanism for moving data around
+5. A **network gateway**, which routes data from the local **internal** network to **external** networks
 
 This section will discuss each of these characteristics.
 
@@ -102,6 +102,15 @@ There are also other restrictions on IPv4 addresses - some important reserved ad
 |`224.0.0.0 - 239.255.255.255`|IP multicasting, e.g. for streaming media|
 |`240.0.0.0 - 255.255.255.254`|reserved for future usage|
 |`255.255.255.255`|local broadcast|
+
+#### IPv4 Structure
+An IPv4 address is made up of two groups of bits.
+
+The first, more significant group of bits is the **network prefix**, which identifies an entire network (or sub-network) - it is also *static* and immutable.
+
+The least significant set forms the **host identifier**, which specifies a particular interface of a host on that network - this is *variable* and therefore can be changed when necessary.
+
+This division is used for two reasons - firstly, it is the basis of traffic routing between IP networks (which is discussed later in this module); secondly, it's used for address allocation purposes.
 
 #### IPv6
 Eventually, we will run out of IP addresses.
@@ -180,34 +189,7 @@ Once **Node 2** receives this request, it will send an **ARP response** if the T
 								   Target IP:  10.12.2.73
 ```
 
-#### Subnets
-Due to performance limitations of broadcast domains, networks are split into **subnets**.​
-
-To facilitate this, IPv4 addresses are split into three sections: a *network ID*, a *host ID* and a *subnet ID*.
-
-A 32-bit **subnet mask** is used to identify the network which a particular node is on - depending on the network, certain sections of the mask are either static or variable.
-
-The IP address and subnet mask are used in tandem to determine the network which a given IP address is connected to.
-
-#### Network Classes
-The first IPv4 addresses were limited to 254 unique allocations. As these depleted, IPv4 was further subdivided through subnets into a **network class** structure.
-
-Depending on the network class, these subnets could take different forms:
-|Class|Octet (binary)|Network ID|Host ID|Network ID|# of networks|# of addresses|
-|-|-|-|-|-|-|-|
-|A|`0XXXXXXX`|`0-127`|`a`|`b.c.d`|2&#8311;|2&sup2;&#8308;|
-|B|`10XXXXXX`|`128-191`|`a.b`|`c.d`|2&sup1;&#8308;|2&sup1;&#8310;|
-|C|`110XXXXX`|`192-223`|`a.b.c`|`d`|2&sup2;&sup1;|2&#8312;|
-|D|`1110XXXX`|`223-254`|`a.b.c.d`|`(experimental)`|2&sup2;&sup3;|2&#8313;|
-
-For instance, the class B IPv4 address `10.0.0.0` would allow for 65,536 available hosts.
-
-### CIDR
-Network classes became mostly obsolete as IPv4 depletion rapidly increased with the dotcom bubble of the late-90s, and it was eventually subsumed and replaced by **Classless Inter-Domain Routing (CIDR)**.
-
-IP addresses are 
-
-#### 3. `localhost`
+### 3. `localhost`
 The `127.x.x.x` category of addresses is reserved for use by internal systems within a host node - when referring to a `localhost`, we mean *this computer*.
 
 It is used to access network services that are running on the host computer via the **local loopback mechanism**, a network interface which bypasses the networking hardware of that computer entirely.
@@ -220,12 +202,115 @@ Because the local loopback mechanism can be used to run a network service on a h
 
 The name `localhost` normally resolves to the IPv4 loopback address `127.0.0.1`, and to the IPv6 loopback address `::1`.
 
-### 4. Internal & External IPs
-### 5. Routing
+### 4. Routing
+Routing refers to the way in which information is redirected through networks.
 
-## Viewing your IP address
-### Windows
-### Linux
+As we are now familiar with IP addresses, we can use IPv4 to demonstrate how this works.
+
+#### Network Classes
+The first IPv4 addresses were limited to 254 unique allocations. As these depleted, IPv4 was further subdivided into a **network class** structure.
+
+Depending on the network class, these sub-networks, or **subnets** could take different forms.
+
+|Class|Network ID|Host ID|Networks|Addresses|
+|-|-|-|-|-|-|-|
+|A|`a`|`b.c.d`|2&#8311;|2&sup2;&#8308;|
+|B|`a.b`|`c.d`|2&sup1;&#8308;|2&sup1;&#8310;|
+|C|`a.b.c`|`d`|2&sup2;&sup1;|2&#8312;|
+|D|`a.b.c.d`|`(experimental)`|2&sup2;&sup3;|2&#8313;|
+
+For instance, the class B IPv4 address `10.0.0.0` would allow for 65,536 available hosts.
+
+#### Subnets
+Due to performance limitations of broadcast domains, networks are split into sub-networks: **subnets**.​
+
+To facilitate this, the split in IPv4 addresses between the network prefix and the host identifier are utilised, but an extra section of bits is added for clarity: the **subnet identifier**.
+
+Let's consider the following address:
+```text
+192.168.100.14/24
+```
+
+In this case, how can we know which section of bits is the network prefix, and which section refers to the host?
+
+#### CIDR
+Network classes became mostly obsolete as IPv4 depletion rapidly increased with the dotcom bubble of the late-90s, and it was eventually subsumed and replaced by **Classless Inter-Domain Routing (CIDR)**.
+
+The section of bits after the address we looked at earlier - the `/24` - is the **subnet identifier**.
+
+The subnet identifier corresponds with a specific 32-bit **subnet mask**.
+
+CIDR uses this to identify the sub-network, within a domain, that a particular node is on:
+
+```text
+┌──────┬─────────────┐ ┌──────┬─────────────┐ ┌──────┬───────────────┐ ┌──────┬─────────────────┐
+│  ID  │ Subnet Mask │ │  ID  │ Subnet Mask │ │  ID  │ Subnet Mask   │ │  ID  │   Subnet Mask   │
+├──────┼─────────────┤ ├──────┼─────────────┤ ├──────┼───────────────┤ ├──────┼─────────────────┤
+│ /1   │ 128.0.0.0   │ │ /9   │ 255.128.0.0 │ │ /17  │ 255.255.128.0 │ │ /25  │ 255.255.255.128 │
+│ /2   │ 192.0.0.0   │ │ /10  │ 255.192.0.0 │ │ /18  │ 255.255.192.0 │ │ /26  │ 255.255.255.192 │
+│ /3   │ 224.0.0.0   │ │ /11  │ 255.224.0.0 │ │ /19  │ 255.255.224.0 │ │ /27  │ 255.255.255.224 │
+│ /4   │ 240.0.0.0   │ │ /12  │ 255.240.0.0 │ │ /20  │ 255.255.240.0 │ │ /28  │ 255.255.255.240 │
+│ /5   │ 248.0.0.0   │ │ /13  │ 255.248.0.0 │ │ /21  │ 255.255.248.0 │ │ /29  │ 255.255.255.248 │
+│ /6   │ 252.0.0.0   │ │ /14  │ 255.252.0.0 │ │ /22  │ 255.255.252.0 │ │ /30  │ 255.255.255.252 │
+│ /7   │ 254.0.0.0   │ │ /15  │ 255.254.0.0 │ │ /23  │ 255.255.254.0 │ │ /31  │ 255.255.255.254 │
+│ /8   │ 255.0.0.0   │ │ /16  │ 255.255.0.0 │ │ /24  │ 255.255.255.0 │ │ /32  │ 255.255.255.255 │
+└──────┴─────────────┘ └──────┴─────────────┘ └──────┴───────────────┘ └──────┴─────────────────┘
+```
+
+Depending on the network, certain sections of the mask, just like the IP address it corresponds to, are either static or variable. The static sections of the subnet mask correspond to the static sections of the IP address.
+
+Let's break this down using the address from earlier:
+```text
+Address:        192.168.100.14/24
+IPv4:           192.168.100.14
+Subnet mask:    255.255.255.0
+Network prefix: 192.168.100.0
+```
+
+By reconciling the static sections of the IPv4 with the subnet mask, we can determine the network which the address is connected to - which in this case is the network containing the 255 IPv4 addresses from `192.168.100.0` to `192.168.100.255`.
+
+### 5. Gateways
+A **network gateway** is a way for a private network to access public networks.
+
+When connecting to the Internet, the packets of information we wish to send - those with a destination outside a given subnet mask - are sent to the network gateway.
+
+Let's say we want to send data outside of the following private network:
+```text
+192.168.1.1/24
+```
+We know that this network has an address of `192.168.1.1`, and a subnet mask of `255.255.255.0` thanks to the CIDR.
+
+When any data is addressed to an IP address outside of `192.168.1.0`, it is sent to the network gateway.
+
+#### NAT
+If several nodes on a private network are connecting to a public network at the same time, the data that passes between those networks is directed through a **default gateway**.
+
+**Network Address Translation (NAT)** allows for information to pass between a private network and a public one, such as the Internet, by pointing all nodes within that network through the default gateway.
+
+Let's say we have three nodes, all in the same network, looking to access the Internet:
+
+```text
+                   Local Network                                    
+			Private IPv4: 192.168.X.X                                    Internet
+┌───────────────────────┴────────────────────────────┐│┌─────────────────────┴────────────────────┐
+                                                      │
+ ┌─────[Node]────┐                                    │
+ │ 192.168.100.3 ├──┐                                 │
+ └───────────────┘  │                                 │
+ ┌─────[Node]────┐  │                ┌────────────[Router]───────────┐
+ │ 192.168.100.4 ├──┼────────────────┤ Default gateway: 192.168.1.1  ├───────────────────────────>
+ └───────────────┘  │                │ Public IPv4:     145.12.131.7 │
+ ┌─────[Node]────┐  │                └───────────────────────────────┘
+ │ 192.168.100.5 ├──┘                                 │
+ └───────────────┘                                    │
+                                                      │
+```
+
+The nodes are all contained within a local network with a **private IP** of `192.168.X.X`.
+
+The router redirects data from all nodes in the network to its **default gateway** of `192.168.1.1`.
+
+NAT translates the information to a **public IP** through the default gateway, allowing the data to access any external IP address.
 
 ## Changing IP address
 **IP-based geolocation** is the mapping of an issued IP address to the location in which the server that a particular node is connected to. 
@@ -250,7 +335,7 @@ VPNs are less powerful than most of the general public believe, for a number of 
 ## Tasks
 ### View the ARP table
 #### macOS, Linux, or Windows Subsystem for Linux
-Open a terminal, and enter the following command:
+Open a terminal, then enter the following command:
 ```text
 admin@ubuntu:~$ cat /proc/net/arp
 ```
@@ -283,6 +368,71 @@ Interface: 192.168.1.154 --- 0x18
 ```
 What might these represent?
 
-### Find your current IP address
+### Find your node's networking information
+#### macOS, Linux, or Windows Subsystem for Linux
+Open a terminal, then enter the following command:
+```text
+admin@ubuntu~$ ifconfig
+```
+You should see a list of network adapters:
+```text
+wifi0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.43.109  netmask 255.255.255.0  broadcast 192.168.43.255
+        inet6 2a01:4c8:1c00:be68:f94e:7ba5:ca3f:2673  prefixlen 64  scopeid 0x0<global>
+        inet6 2a01:4c8:1c00:be68:2d49:57fe:237f:778a  prefixlen 128  scopeid 0x0<global>
+        inet6 fe80::f94e:7ba5:ca3f:2673  prefixlen 64  scopeid 0xfd<compat,link,site,host>
+        ether a0:af:bd:df:79:10  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth0: etc
+```
+
+Using this information, find your IPv4 address and subnet mask.
+
+#### Windows
+Open a command prompt/Powershell, then enter the following command:
+```text
+ C:\WINDOWS\system32>ipconfig/all
+```
+Doing this will give you a list of network adapters:
+```text
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : DESKTOP-JLGAKSF
+   Primary Dns Suffix  . . . . . . . :
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+   etc
+```
+
+Using this information, find your IPv4 address and subnet mask.
+
+### Find network information using a subnet calculator
+For this task, you will use your IPv4 address and subnet mask to discover more about your machine's connection to its local network.
+
+Navigate to [this online subnet calculator](https://www.calculator.net/ip-subnet-calculator.html​).
+
+Leave the network class as 'Any', then enter your machine's subnet mask and IP address into the corresponding fields.
+
+Click calculate - you should receive a similar result to the following:
+
+![Subnet calculator information](https://i.imgur.com/BsedIUN.png)
+
 ### Change your IP address
+#### Find your machine's GPS location
+Navigate to [this IP geolocation finder](https://www.iplocation.net/find-ip-address).
+
+Which address, for which node, is this service using to locate your machine?
+
 #### Installing Opera VPN
+Download Opera VPN from [the official site](https://www.opera.com/features/free-vpn), then follow the installation instructions.
+
+Once installed, open up a browser window in Opera VPN.
+
+Navigate back to the IP geolocation finder - what is happening here?
