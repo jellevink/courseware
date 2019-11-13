@@ -8,7 +8,7 @@
 <!--TOC_END-->
 ## Overview
 Ansible is an open-source software provisioning, configuration management, and application-deployment tool.
-It runs on many Unix-like systems, and can configure both Unix-like systems as well as Microsoft Windows.
+It runs on and can configure many Unix-like systems, as well as Microsoft Windows systems.
 <!--MODULES_START-->
 ## Modules
 - [Introduction](./modules/introduction)
