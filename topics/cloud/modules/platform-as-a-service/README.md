@@ -45,10 +45,9 @@ Features like: scalability, multi-tenancy, high-availability are included and ma
 
 ### Advantages
 
-Explain testing you've done, and why you've done it in this way?
-
-What design patterns did you use? What best practices?
-
-What tools did you use and why?
-
-How did you review your own work?
+As **PaaS** is build on top of _IaaS_ it offers all of the latter advantages with the additional ones like:
+- improving coding efficiency through the use of in-built tools
+- development options for multiple platforms 
+- sophisticated tools for development, business intelligence and analytics through the pay-as-you go model allow even the smallest of companies to take advantage of the tools and save time
+- remote team work is available as all the resources are reachable over the internet
+- environment and all the capabilities are there for a complete application lifecycle: build, test, deploy 
