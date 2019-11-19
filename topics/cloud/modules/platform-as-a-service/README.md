@@ -13,6 +13,8 @@ Platform as a Service is an environment in the cloud with all the resources you 
 
 The resources are purchased on pay-as-you go basis, where access to them is granted through a secure internet connection.
 
+Service is mainly targeting developers.
+
 **PaaS** includes *IaaS* services with the addition of: 
 - **middleware**
 - **development tools**
@@ -27,6 +29,10 @@ With *PaaS* you would avoid the hassle of paying for and managing things like:
 - **development tools**
 
 The main responsibilities that are left in the users hands are the application and services that you're developing while everything else is the responsibility of the cloud provider. 
+
+------------------------------------------------------------------------------------------------------------------------
+**INSERT PICTURE HERE**
+------------------------------------------------------------------------------------------------------------------------
 
 ### Business scenarios
 
