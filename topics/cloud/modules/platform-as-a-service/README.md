@@ -3,7 +3,7 @@
 <!--TOC_START-->
 ### Contents
 	- [Description](#description)
-	- [Use cases](#use-cases)
+	- [Business scenarios](#business-scenarios)
 	- [Advantages](#advantages)
 
 <!--TOC_END-->
